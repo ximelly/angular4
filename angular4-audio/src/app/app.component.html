@@ -1,0 +1,21 @@
+<alert>
+  <strong>this is alert component!</strong>
+</alert>
+
+<alert type="warning" dismissOnTimeout="1000">
+  <strong>this is alert warning component!</strong>
+</alert>
+
+<alert type="error">
+  <strong>this is alert error component!</strong>
+</alert>
+
+<div>
+  <alert [type]="alertType" dismissible="true" (onClosed)="receive($event)">this is can be closed component</alert>
+</div>
+
+<div>
+  <alert type="warning" dismissible="false" (onClosed)="receive($event)">this is can be closed component</alert>
+</div>
+<app-audio [audiosrc]="item" *ngFor="let item of audiosrc" (onPauseAudio)='audioPause($event)'></app-audio>
+

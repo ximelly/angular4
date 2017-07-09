@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+.alert {background-color: yellowgreen}
+.alert-warning {background-color: yellow}
+.alert-error {background-color: red}
+.close {text-align: right;color: blue;cursor: pointer}
