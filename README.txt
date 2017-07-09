@@ -1,1 +1,3 @@
 ximelly 's angular note...
+
+angular4 Ñ§Ï°±Ê¼Ç
