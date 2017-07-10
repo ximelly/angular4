@@ -1,11 +1,11 @@
-<audio [src]="audiosrc" controls [preload]="preload" #audioElement></audio>
+<audio [src]="audiosrc" controls [preload]="preload" [autoplay]="autoplay" #audioElement (canplaythrough)="canPlay()" (error)="audioError()"></audio>
 <div><span>总时间：{{allTime}}</span>
 <span>当前播放时间：{{currentTime}}</span>
 <span *ngIf="progross">播放进度：{{progross}}</span></div>
 <div class="handleButton" (click)="handleButton()">
-    <span class="loading" *ngIf="audo_loading" ></span>
-    <span class="error" *ngIf="audo_error"></span>
-    <span class="play" *ngIf="audo_status"></span>
-    <span class="pause" *ngIf="!audo_status"></span>
+    <span class="loading" *ngIf="audioStatus=='loading'" ></span>
+    <span class="error" *ngIf="audioStatus=='error'"></span>
+    <span class="play" *ngIf="audioStatus=='play'"></span>
+    <span class="pause" *ngIf="audioStatus=='pause'"></span>
 </div>
 <br/>

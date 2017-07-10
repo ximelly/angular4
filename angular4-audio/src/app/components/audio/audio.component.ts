@@ -8,14 +8,13 @@ import { Component,OnInit,ViewChild,ElementRef,EventEmitter,Input,Output,DoCheck
 export class AudioComponent implements OnInit,DoCheck {
   @Input() public audiosrc: string = '';
   @ViewChild('audioElement') _audio: ElementRef;
-  private allTime:number=0;//当前音频总时长
+  private allTime:number=0;//音频总时长
   public preload:string="none";//是否预加载
   public loop:boolean=false;//是否循环播放
-  private currentTime:number=0;//当前播放时间
-  private progross:string;//当前播放进度百分比
-  private audo_loading:boolean=false;
-  private audo_error:boolean=false;
-  private audo_status:boolean=false;
+  public autoplay:boolean=false;//是否自动播放
+  private currentTime:number=0;//播放时间
+  private progross:string;//播放进度百分比
+  private audioStatus:string="pause";//音频播放状态
   //对外开放的事件
   @Output() public onPlayAudio: EventEmitter<AudioComponent> = new EventEmitter<AudioComponent>();
   @Output() public onPauseAudio: EventEmitter<AudioComponent> = new EventEmitter<AudioComponent>();
@@ -26,7 +25,7 @@ export class AudioComponent implements OnInit,DoCheck {
 
   public playAudio(): void{
     this._audio.nativeElement.play();
-    this.audo_status=true;
+    this.audioStatus="play";
     setTimeout(()=>{
       this.allTime=parseInt(this._audio.nativeElement.duration);
     },500);
@@ -38,19 +37,24 @@ export class AudioComponent implements OnInit,DoCheck {
   public pauseAudio(): void{
     this.onPauseAudio.emit(this);
     this._audio.nativeElement.pause();
-    this.audo_status=false;
+    this.audioStatus="pause";
   }
   
   public handleButton(): void{
     console.log(this._audio)
-    if(!this._audio.nativeElement.preload){
-      return;
-    }
     if(this._audio.nativeElement.paused){
-      this.playAudio();
+      if(this._audio.nativeElement.preload=="none"){
+        this._audio.nativeElement.load();
+        this.audioStatus="loading";
+      }
     }else{
       this.pauseAudio();
     }
   }
-
+  canPlay(){//音频加载成功
+    this.playAudio();
+  }
+  audioError(){//音频加载失败
+    this.audioStatus="error"
+  }
 }
