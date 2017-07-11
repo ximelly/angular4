@@ -13,7 +13,7 @@ export class AudioComponent implements OnInit,DoCheck {
   @Input() type:number=1;//音频样式
   @Input() message:string='立即播放';
   @Input() bgColor:string="";
-  @Input() allTime:number;//音频总时长
+  @Input() allTime:number=0;//音频总时长
   @Input() scale:1;//音频显示宽度=音频时长比例*scale
   @ViewChild('audioElement') _audio: ElementRef;
   private currentTime:number=0;//播放时间

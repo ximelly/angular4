@@ -1,13 +1,22 @@
 <div *ngIf='type==1' class="audioOne">
     <audio [src]="audiosrc" controls [preload]="preload" [loop]='loop' [autoplay]="autoplay" #audioElement (loadedmetadata)="getDuration()" (canplaythrough)="canPlay()" (error)="audioError()" (timeupdate)='currentTimeChange()' (ended)="end()"></audio>
-    <div><span>总时间：{{allTime}}</span>
-    <span>当前播放时间：{{currentTime}}</span>
-    <span *ngIf="progross">播放进度：{{progross}}</span></div>
-    <div class="handleButton" (click)="handleButton()">
-        <span class="loading" *ngIf="audioStatus=='loading'" ></span>
-        <span class="error" *ngIf="audioStatus=='error'"></span>
-        <span class="play" *ngIf="audioStatus=='playing'"></span>
-        <span class="pause" *ngIf="audioStatus=='noload'||audioStatus=='pause'"></span>
+    <div class='audioWrap'>
+        <div class="handleButton" (click)="handleButton()">
+            <span class="loading" *ngIf="audioStatus=='loading'" ></span>
+            <span class="error" *ngIf="audioStatus=='error'"></span>
+            <span class="play" *ngIf="audioStatus=='playing'"></span>
+            <span class="pause" *ngIf="audioStatus=='noload'||audioStatus=='pause'"></span>
+        </div>
+        <div class="progress">
+            <div class="bar_bg" (click)="changeCurrent()">
+                <div class="currentBar" [style.width]="progross"></div>
+                <div class="barCircle"></div>
+            </div>
+            <div class="audioTime">
+                <div class="currentTime">{{currentTime}}</div>
+                <div class="allTime">{{allTime}}</div>
+            </div>
+        </div>
     </div>
 </div>
 
