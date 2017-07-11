@@ -1,4 +1,4 @@
-audio{display: none;}
+/*audio{display: none;}*/
 .handleButton{width:30px;height:30px;border:1px solid #ed6c00;border-radius: 100%;}
 .handleButton span{display: block;height:100%;background-position: center center;background-repeat: no-repeat;background-size:auto 50%;}
 .handleButton span.play{background-size:auto 60%;}

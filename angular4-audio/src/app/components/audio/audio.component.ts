@@ -14,7 +14,7 @@ export class AudioComponent implements OnInit,DoCheck {
   public autoplay:boolean=false;//是否自动播放
   private currentTime:number=0;//播放时间
   private progross:string;//播放进度百分比
-  private audioStatus:string="pause";//音频播放状态
+  private audioStatus:string="noload";//音频播放状态,初始为未加载
   //对外开放的事件
   @Output() public onPlayAudio: EventEmitter<AudioComponent> = new EventEmitter<AudioComponent>();
   @Output() public onPauseAudio: EventEmitter<AudioComponent> = new EventEmitter<AudioComponent>();
@@ -25,14 +25,7 @@ export class AudioComponent implements OnInit,DoCheck {
 
   public playAudio(): void{
     this._audio.nativeElement.play();
-    this.audioStatus="play";
-    setTimeout(()=>{
-      this.allTime=parseInt(this._audio.nativeElement.duration);
-    },500);
-    setInterval(()=>{
-        this.currentTime=parseInt(this._audio.nativeElement.currentTime);
-        this.progross=(-1!=(JSON.stringify(this.currentTime/this.allTime).indexOf(".")))?(JSON.stringify(Math.ceil(this.currentTime*100/this.allTime)) + "%"):"0%";
-    },500)
+    this.audioStatus="playing";
   }
   public pauseAudio(): void{
     this.onPauseAudio.emit(this);
@@ -41,11 +34,12 @@ export class AudioComponent implements OnInit,DoCheck {
   }
   
   public handleButton(): void{
-    console.log(this._audio)
     if(this._audio.nativeElement.paused){
-      if(this._audio.nativeElement.preload=="none"){
+      if(this._audio.nativeElement.preload=="none"&&this.audioStatus=="noload"){
         this._audio.nativeElement.load();
         this.audioStatus="loading";
+      }else{//预加载或者暂停状态，直接播放
+        this.playAudio();
       }
     }else{
       this.pauseAudio();
@@ -55,6 +49,13 @@ export class AudioComponent implements OnInit,DoCheck {
     this.playAudio();
   }
   audioError(){//音频加载失败
-    this.audioStatus="error"
+    this.audioStatus="error";
+  }
+  currentTimeChange(){//监听播放时间变化
+    this.currentTime=parseInt(this._audio.nativeElement.currentTime);
+    this.progross=(-1!=(JSON.stringify(this.currentTime/this.allTime).indexOf(".")))?(JSON.stringify(Math.ceil(this.currentTime*100/this.allTime)) + "%"):"0%";
+  }
+  getDuration(){//获取音频总时长
+    this.allTime=parseInt(this._audio.nativeElement.duration);
   }
 }
