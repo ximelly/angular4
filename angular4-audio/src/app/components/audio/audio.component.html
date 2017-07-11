@@ -1,4 +1,4 @@
-<audio [src]="audiosrc" controls [preload]="preload" [autoplay]="autoplay" #audioElement (loadedmetadata)="getDuration()" (canplaythrough)="canPlay()" (error)="audioError()" (timeupdate)='currentTimeChange()'></audio>
+<audio [src]="audiosrc" controls [preload]="preload" [loop]='loop' [autoplay]="autoplay" #audioElement (loadedmetadata)="getDuration()" (canplaythrough)="canPlay()" (error)="audioError()" (timeupdate)='currentTimeChange()' (ended)="end()"></audio>
 <div><span>总时间：{{allTime}}</span>
 <span>当前播放时间：{{currentTime}}</span>
 <span *ngIf="progross">播放进度：{{progross}}</span></div>

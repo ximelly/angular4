@@ -10,13 +10,19 @@ export class AppComponent {
   public alertType: string = 'success';
   public audiosrc=[{
     src:"https://img.mama100.cn/mp3/site/mobile/specialist/201706/1498455622510.mp3",
-    preload:"none"
+    preload:"auto",
+    autoplay:false,
+    loop:false
   },{
     src:'./assets/aaa.mp3',
-    preload:"none"
+    preload:"none",
+    autoplay:true,
+    loop:false
   },{
     src:'./assets/bbb.mp3',
-    preload:"auto"
+    preload:"none",
+    autoplay:false,
+    loop:true
   }];
   public receive(object){
     console.log(object);

@@ -6,12 +6,12 @@ import { Component,OnInit,ViewChild,ElementRef,EventEmitter,Input,Output,DoCheck
   styleUrls:['./audio.component.css']
 })
 export class AudioComponent implements OnInit,DoCheck {
-  @Input() public audiosrc: string = '';
+  @Input() audiosrc: string = '';
+  @Input() autoplay:boolean=false;//是否自动播放
+  @Input() preload:string="none";//是否预加载
+  @Input() loop:boolean=false;//是否循环播放
   @ViewChild('audioElement') _audio: ElementRef;
   private allTime:number=0;//音频总时长
-  public preload:string="none";//是否预加载
-  public loop:boolean=false;//是否循环播放
-  public autoplay:boolean=false;//是否自动播放
   private currentTime:number=0;//播放时间
   private progross:string;//播放进度百分比
   private audioStatus:string="noload";//音频播放状态,初始为未加载
@@ -46,7 +46,11 @@ export class AudioComponent implements OnInit,DoCheck {
     }
   }
   canPlay(){//音频加载成功
-    this.playAudio();
+    if(this.audioStatus=="noload"&&this.autoplay==false){//银屏准备好后，若没有点击播放按钮&&未设置自动播放则不播放
+      return;
+    }else{
+      this.playAudio();
+    }
   }
   audioError(){//音频加载失败
     this.audioStatus="error";
@@ -57,5 +61,8 @@ export class AudioComponent implements OnInit,DoCheck {
   }
   getDuration(){//获取音频总时长
     this.allTime=parseInt(this._audio.nativeElement.duration);
+  }
+  end(){//监听音乐播放完毕
+    this.audioStatus="pause";
   }
 }
