@@ -130,6 +130,8 @@ export class AudioComponent implements OnInit,DoCheck {
       this.audioStatus="pause";
     }else if(this.type==2){
       this.message=this.saveMessage;
+    }else if(this.type==3){
+      this.voiceOn=false;
     }
   }
 }
