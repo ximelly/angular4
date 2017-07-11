@@ -21,3 +21,15 @@
         </div>
     </div>
 </div>
+
+<div *ngIf='type==3' class="audioThree">
+    <audio [src]="audiosrc" controls [preload]="preload" [loop]='loop' [autoplay]="autoplay" #audioElement (loadedmetadata)="getDuration()" (canplaythrough)="canPlay()" (error)="audioError()" (timeupdate)='currentTimeChange()' (ended)="end()"></audio>
+    <div (click)="handleButton()">
+        <div class="voiceArrow"></div>
+        <div class="voiceMain" [style.width]="allTime*scale+'px'">
+            <span class="message">{{message}}</span>
+            <span class="voice" [class.speak]="voiceOn"></span>
+            <div class="voiceOn" *ngIf='firstLload'></div>
+        </div>
+    </div>
+</div>
