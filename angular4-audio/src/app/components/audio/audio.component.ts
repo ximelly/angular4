@@ -134,4 +134,8 @@ export class AudioComponent implements OnInit,DoCheck {
       this.voiceOn=false;
     }
   }
+  changeCurrent(event){
+    let e = event || window.event;
+    this._audio.nativeElement.currentTime=Math.ceil(this.allTime*(e.clientX-e.target.offsetLeft)/e.target.offsetWidth);
+  }
 }

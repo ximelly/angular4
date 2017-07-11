@@ -17,7 +17,7 @@ export class AppComponent {
   },{
     src:'./assets/aaa.mp3',
     preload:"none",
-    autoplay:true,
+    autoplay:false,
     loop:false,
     type:1
   },{
