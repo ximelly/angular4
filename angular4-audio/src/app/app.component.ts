@@ -12,17 +12,37 @@ export class AppComponent {
     src:"https://img.mama100.cn/mp3/site/mobile/specialist/201706/1498455622510.mp3",
     preload:"auto",
     autoplay:false,
-    loop:false
+    loop:false,
+    type:1
   },{
     src:'./assets/aaa.mp3',
     preload:"none",
     autoplay:true,
-    loop:false
+    loop:false,
+    type:1
   },{
     src:'./assets/bbb.mp3',
     preload:"none",
     autoplay:false,
-    loop:true
+    loop:true,
+    type:2,
+    bgColor:"blue",
+    message:"点击播放"
+  },{
+    src:'./assets/bbb.mp3',
+    preload:"none",
+    autoplay:false,
+    loop:false,
+    type:2,
+    bgColor:"gray",
+    message:"当前音频不可用"
+  },{
+    src:'./assets/bbb.mp3',
+    preload:"none",
+    autoplay:false,
+    loop:false,
+    type:2,
+    message:"点击收听"
   }];
   public receive(object){
     console.log(object);

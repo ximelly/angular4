@@ -17,5 +17,6 @@
 <div>
   <alert type="warning" dismissible="false" (onClosed)="receive($event)">this is can be closed component</alert>
 </div>-->
-<app-audio [audiosrc]="item.src" [preload]="item.preload" [loop]="item.loop" [autoplay]="item.autoplay" *ngFor="let item of audiosrc" (onPauseAudio)='audioPause($event)'></app-audio>
-
+<div *ngFor="let item of audiosrc">
+  <app-audio [audiosrc]="item.src" [preload]="item.preload" [message]="item.message" [type]='item.type' [loop]="item.loop" [bgColor]="item.bgColor" [autoplay]="item.autoplay" (onPauseAudio)='audioPause($event)'></app-audio>
+</div>
