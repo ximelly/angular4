@@ -19,7 +19,8 @@ export class AppComponent {
     preload:"none",
     autoplay:false,
     loop:false,
-    type:1
+    type:1,
+    allTime:500
   },{
     src:'./assets/bbb.mp3',
     preload:"none",

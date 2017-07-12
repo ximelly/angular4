@@ -6,16 +6,17 @@ import { Component,OnInit,ViewChild,ElementRef,EventEmitter,Input,Output,DoCheck
   styleUrls:['./audio.component.css']
 })
 export class AudioComponent implements OnInit,DoCheck {
-  @Input() audiosrc: string = '';
+  @Input() audiosrc: string = '';//音频资源地址
   @Input() autoplay:boolean=false;//是否自动播放
   @Input() preload:string="none";//是否预加载
   @Input() loop:boolean=false;//是否循环播放
   @Input() type:number=1;//音频样式
-  @Input() message:string='立即播放';
-  @Input() bgColor:string="";
+  @Input() message:string='立即播放';//音频上的文字信息
+  @Input() bgColor:string="";//音频背景色
   @Input() allTime:number=0;//音频总时长
   @Input() scale:1;//音频显示宽度=音频时长比例*scale
   @ViewChild('audioElement') _audio: ElementRef;
+  @ViewChild('progressBar') progressBar: ElementRef;
   private currentTime:number=0;//播放时间
   private progross:string;//播放进度百分比
   private audioStatus:string="noload";//音频播放状态,初始为未加载
@@ -88,7 +89,6 @@ export class AudioComponent implements OnInit,DoCheck {
     }
   }
   canPlay(){//音频加载成功
-    //if(this.type==1){}else if(this.type==2){}
     if(this.type==1){
       if(this.audioStatus=="noload"&&this.autoplay==false){//银屏准备好后，若没有点击播放按钮&&未设置自动播放则不播放
         return;
@@ -135,7 +135,9 @@ export class AudioComponent implements OnInit,DoCheck {
     }
   }
   changeCurrent(event){
-    let e = event || window.event;
-    this._audio.nativeElement.currentTime=Math.ceil(this.allTime*(e.clientX-e.target.offsetLeft)/e.target.offsetWidth);
+    if(!this._audio.nativeElement.paused){
+      let e = event || window.event;
+      this._audio.nativeElement.currentTime=Math.floor(this.currentTime*((e.clientX-this.progressBar.nativeElement.offsetLeft)*100/this.progressBar.nativeElement.offsetWidth)/parseInt(this.progross));
+    }
   }
 }
