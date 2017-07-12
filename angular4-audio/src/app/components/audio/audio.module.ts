@@ -8,4 +8,4 @@ import { AudioComponent } from './audio.component';
     exports:    [ AudioComponent ],
     entryComponents: [ AudioComponent ]//此属性定义表示ng自己使用
 })
-export class AlertModule { }
+export class AudioModule { }

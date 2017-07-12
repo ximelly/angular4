@@ -33,6 +33,7 @@ export class AudioComponent implements OnInit,DoCheck {
   ngDoCheck(): void{}
 
   public playAudio(): void{
+    this.onPlayAudio.emit(this);
     this._audio.nativeElement.play();
     if(this.type==1){
       this.audioStatus="playing";
@@ -90,7 +91,7 @@ export class AudioComponent implements OnInit,DoCheck {
   }
   canPlay(){//音频加载成功
     if(this.type==1){
-      if(this.audioStatus=="noload"&&this.autoplay==false){//银屏准备好后，若没有点击播放按钮&&未设置自动播放则不播放
+      if(this.audioStatus=="noload"&&this.autoplay==false){//音频准备好后，若没有点击播放按钮&&未设置自动播放则不播放
         return;
       }else{
         this.playAudio();
