@@ -9,8 +9,9 @@
         </div>
         <div class="progress">
             <div class="bar_bg" (click)="changeCurrent()" #progressBar>
+                <div class="loadBar" [style.width]="loadrogross"></div>
                 <div class="currentBar" [style.width]="progross"></div>
-                <div class="barCircle" [style.left]="progross"></div>
+                <div class="barCircle" [style.left]="progross"><div></div></div>
             </div>
             <div class="audioTime">
                 <div class="currentTime">{{currentTime*1000|date:"mm:ss"}}</div>

@@ -19,6 +19,7 @@ export class AudioComponent implements OnInit,DoCheck {
   @ViewChild('progressBar') progressBar: ElementRef;
   private currentTime:number=0;//播放时间
   private progross:string;//播放进度百分比
+  private loadrogross:string//音频加载百分比
   private audioStatus:string="noload";//音频播放状态,初始为未加载
   private voiceOn:boolean=false;//音频是否正在播放
   private saveMessage:string;//保存音频初始化文案
@@ -118,6 +119,10 @@ export class AudioComponent implements OnInit,DoCheck {
     }else{
       return;
     }
+    setTimeout(()=>{
+       this.getFirstBuffRange();
+    },100)
+    
   }
   getDuration(){//获取音频总时长
      if(this.type==1){
@@ -138,7 +143,13 @@ export class AudioComponent implements OnInit,DoCheck {
   changeCurrent(event){
     if(!this._audio.nativeElement.paused){
       let e = event || window.event;
-      this._audio.nativeElement.currentTime=Math.floor(this.currentTime*((e.clientX-this.progressBar.nativeElement.offsetLeft)*100/this.progressBar.nativeElement.offsetWidth)/parseInt(this.progross));
+      let mayTime=Math.floor(this.currentTime*((e.clientX-this.progressBar.nativeElement.offsetLeft)*100/this.progressBar.nativeElement.offsetWidth)/parseInt(this.progross));
+      if(this._audio.nativeElement.buffered.end(0)>=mayTime){
+        this._audio.nativeElement.currentTime=mayTime;
+      }
     }
   }
+  getFirstBuffRange(){//获取缓存区域
+    this.loadrogross=(-1!=(JSON.stringify(this._audio.nativeElement.buffered.end(0)/this.allTime).indexOf(".")))?(JSON.stringify(Math.ceil(this._audio.nativeElement.buffered.end(0)*100/this.allTime)) + "%"):"0%";
+  } 
 }
