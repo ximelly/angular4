@@ -1,3 +1,14 @@
+//AudioComponent使用API
+// [type]              音频的类型（1、百分妈妈课堂，2、问专家，3、专家在线）
+// [audiosrc]          音频资源链接
+// [preload]           是否预加载（none、auto），默认为none
+// [autoplay]          是否自动播放（true、false），默认为false
+// loop]               是否循环播放（true、false），默认为false
+// [scale]             type为3的音频，音频显示宽度=音频时长比例*scale，默认为1
+// [message]           type为2的音频上显示的文字，默认为立即播放
+// [bgColor]           type为2的音频背景色（blue、green、gray），默认为green
+// (onPauseAudio)      监听音频暂停，通过event._audio可得到audio对象
+// (onPlayAudio)       监听音频播放，通过event._audio可得到audio对象
 import { Component,OnInit,ViewChild,ElementRef,EventEmitter,Input,Output,DoCheck} from '@angular/core';
 
 @Component({

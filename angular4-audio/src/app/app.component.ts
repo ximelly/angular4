@@ -67,4 +67,7 @@ export class AppComponent {
   public audioPause(object){
     console.log(object._audio.nativeElement.currentTime);
   }
+  public audioPlay(object){
+    console.log(object._audio);
+  }
 }
