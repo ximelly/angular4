@@ -1,73 +1,24 @@
-import { Component } from '@angular/core';
+import { Component,QueryList,ViewChildren,ViewChild,ElementRef } from '@angular/core';
+import { AudioControlComponent } from './components/audio/audioControl.component';
+import { ToastMessageComponent } from './components/toastMessage/toastMessage.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works!';
-  public alertType: string = 'success';
-  public audiosrc=[{
-    src:"https://img.mama100.cn/mp3/site/mobile/specialist/201706/1498455622510.mp3",
-    preload:"auto",
-    autoplay:false,
-    loop:false,
-    type:1
-  },{
-    src:'./assets/aaa.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:false,
-    type:1,
-    allTime:500
-  },{
-    src:'./assets/bbb.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:true,
-    type:2,
-    message:"立即播放"
-  },{
-    src:'./assets/bbb.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:true,
-    type:2,
-    bgColor:"blue",
-    message:"点击播放"
-  },{
-    src:'./assets/bbb.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:false,
-    type:2,
-    bgColor:"gray",
-    message:"当前音频不可用"
-  },{
-    src:'./assets/bbb.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:false,
-    type:3,
-    allTime:200,
-    scale:0.3
-  },{
-    src:'./assets/aaa.mp3',
-    preload:"none",
-    autoplay:false,
-    loop:false,
-    type:3,
-    allTime:500,
-    scale:0.3
-  }];
-  public receive(object){
-    console.log(object);
+export class AppComponent{
+  @ViewChildren(AudioControlComponent) private audioControls:QueryList<AudioControlComponent>;
+  @ViewChild(ToastMessageComponent) private toasta:ToastMessageComponent;
+  
+  //初始化默认选中左tab 
+  private tabTypeNum: string;
+  private payseAllAudio(){
+    this.haha();
+    this.audioControls.forEach(audio=>{if(audio.audioStatus=="playing"){audio.pauseAudio();}})
   }
-  public audioPause(object){
-    console.log(object._audio.nativeElement.currentTime);
-  }
-  public audioPlay(object){
-    console.log(object._audio);
+  haha(){
+    this.toasta.message="xxx";
+    this.toasta.toast();
   }
 }

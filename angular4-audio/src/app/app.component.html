@@ -1,22 +1,15 @@
-<!--<alert>
-  <strong>this is alert component!</strong>
-</alert>
 
-<alert type="warning" dismissOnTimeout="1000">
-  <strong>this is alert warning component!</strong>
-</alert>
-
-<alert type="error">
-  <strong>this is alert error component!</strong>
-</alert>
-
-<div>
-  <alert [type]="alertType" dismissible="true" (onClosed)="receive($event)">this is can be closed component</alert>
-</div>
-
-<div>
-  <alert type="warning" dismissible="false" (onClosed)="receive($event)">this is can be closed component</alert>
-</div>-->
-<div *ngFor="let item of audiosrc">
-  <app-audio [audiosrc]="item.src" [preload]="item.preload" [scale]="item.scale" [allTime]="item.allTime" [message]="item.message" [type]='item.type' [loop]="item.loop" [bgColor]="item.bgColor" [autoplay]="item.autoplay" (onPauseAudio)='audioPause($event)' (onPlayAudio)="audioPlay($event)"></app-audio>
-</div>
+<div (click)="toastMess.toast();toastMess.message='kanwode'" >dianji</div>
+<br/>
+<div (click)="toggleAudio()" >调用子组件的点击事件</div>
+<br/>
+<div (click)="payseAllAudio()" >停止页面所有正在播放的audioControl音频</div>
+<br/>
+<toastMessage #toastMess></toastMessage>
+<audioControl (onPlayAudio)="payseAllAudio()" #haha loop=true audiosrc="http://img2.mama100.com/mp3/site/mobile/specialist/201708/1501727768370.mp3"></audioControl>
+<audioControl (onPlayAudio)="payseAllAudio()" audiosrc="http://img2.mama100.com/mp3/site/mobile/specialist/201708/1501727176357.mp3"></audioControl>
+<audioControl (onPlayAudio)="payseAllAudio()" audiosrc="http://img2.mama100.com/mp3/site/mobile/specialist/201708/1501666781949.mp3"></audioControl>
+<audioMessage audiosrc="https://img2.mama100.com/course/mp3/201707/2c9180865d73876c015d765228720016.mp3"></audioMessage>
+<audioMessage audiosrc="https://img2.mama100.com/course/mp3/201707/2c9180865d73876c015d765228720016.mp3"></audioMessage>
+<audioSimple audiosrc="https://img2.mama100.com/course/mp3/201707/2c9180865d73876c015d765228720016.mp3"></audioSimple>
+<audioSimple audiosrc="https://img2.mama100.com/course/mp3/201707/2c9180865d73876c015d765228720016.mp3"></audioSimple>
